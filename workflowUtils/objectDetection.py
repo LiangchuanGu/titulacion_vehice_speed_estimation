@@ -1,6 +1,9 @@
 import tensorflow as tf
+physical_devices = tf.config.list_physical_devices('GPU')
+print(physical_devices)
 tf.config.set_visible_devices([], 'GPU')
 visible_devices = tf.config.get_visible_devices()
+print(visible_devices)
 
 import os
 import datetime
@@ -98,14 +101,14 @@ class objectDetectorV4(object):
             class_ind = int(out_classes[i])
             bbox_color = colors[class_ind]
             bbox_thick = int(0.6 * (image_h + image_w) / 600)
-            c1, c2 = (coor[1], coor[0]), (coor[3], coor[2])
+            c1, c2 = (int(coor[1]), int(coor[0])), (int(coor[3]), int(coor[2]))
             cv2.rectangle(image, c1, c2, bbox_color, bbox_thick)
 
             if show_label:
                 bbox_mess = '%s: %.2f-km/h' % (self.classes[class_ind], score)
                 t_size = cv2.getTextSize(bbox_mess, 0, fontScale, thickness=bbox_thick // 2)[0]
                 c3 = (c1[0] + t_size[0], c1[1] - t_size[1] - 3)
-                cv2.rectangle(image, c1, (np.float32(c3[0]), np.float32(c3[1])), bbox_color, -1) #filled
+                cv2.rectangle(image, c1, (np.int(c3[0]), np.int(c3[1])), bbox_color, -1) #filled
 
                # cv2.putText(image, bbox_mess, (c1[0], np.float32(c1[1] - 2)), cv2.FONT_HERSHEY_SIMPLEX,
                             #fontScale, (0, 0, 0), bbox_thick // 2, lineType=cv2.LINE_AA)
@@ -128,7 +131,7 @@ class objectDetectorV4(object):
         img = img[np.newaxis, ...].astype(np.float32)
         batch_data = tf.constant(img)
         pred_bbox = self.infer(batch_data)
-
+        print("pred_bbox: {}".format(pred_bbox))
         for key, value in pred_bbox.items():
             boxes = value[:, :, 0:4]
             pred_conf = value[:, :, 4:]

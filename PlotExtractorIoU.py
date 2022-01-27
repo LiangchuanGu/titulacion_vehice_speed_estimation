@@ -18,7 +18,7 @@ parser.add_argument("-m", "--metric", default='euclidean',
 args = parser.parse_args()
 
 
-video = f"source_material/streetVideos/seattle{args.video}.mp4"
+video = f"dataset/streetVideos/seattle{args.video}.mp4"
 videoDir = f"results/plots_tables/{args.metric}/video{args.video}"
 
 csvDirSamples = f"results/plots_tables/{args.metric}/samples.txt"

@@ -25,7 +25,7 @@
 //! define the selected population of EDA (default: 20)
 #define EDA_SEL_POP (100)
 //! define the number of iterations of EDA (default: 100)
-#define EDA_ITER_NUM (20)
+#define EDA_ITER_NUM (100)
 //! define the threshold of ratio of reprojection errors between iterations (default: 0.10)
 #define EDA_REPROJ_ERR_THLD (0.0001)
 //! defines range for 2D point variation 

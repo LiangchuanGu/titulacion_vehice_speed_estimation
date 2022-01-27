@@ -321,21 +321,22 @@ void CCamCal::calCamEdaOpt(void){
 		}
 
 
-		fReprojErrMeanPrev = fReprojErrMean;
-		projErrMeanPrev = projErrMean;
-		dReprojErrMeanPrev = dReprojErrMean;
-
 		std::stable_sort(voPtParams.begin(), voPtParams.end(), compDistError);
 
 		voPtParams.erase(voPtParams.begin() + nN, voPtParams.end());
 
 		//check if generation needs to stop
-		/*
+		std::cout << "[DEBUG] projErrMeanPrev * EDA_REPROJ_ERR_THLD: " << projErrMeanPrev * EDA_REPROJ_ERR_THLD
+		          << ", std::abs(projErrMean - projErrMeanPrev): " << std::abs(projErrMean - projErrMeanPrev) << "\n";
 		if((0 < iIter) && ((projErrMeanPrev * EDA_REPROJ_ERR_THLD) > std::abs(projErrMean - projErrMeanPrev))){
 			std::printf("Projection error is small enough. Stop generation.\n");
 			break;
 		}
-		*/
+
+		fReprojErrMeanPrev = fReprojErrMean;
+		projErrMeanPrev = projErrMean;
+		dReprojErrMeanPrev = dReprojErrMean;
+		
 
 		sPtParamsObj = estEdaParamRng(&voPtParams);
 

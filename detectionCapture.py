@@ -11,7 +11,7 @@ parser.add_argument("-v", "--video", default=1,
                     help="Index of the video")
 args = parser.parse_args()
 
-VIDEOPATH = f"source_material/streetVideos/seattle{args.video}.mp4"
+VIDEOPATH = f"dataset/streetVideos/seattle{args.video}.mp4"
 
 # Initialize video object
 cap = cv2.VideoCapture(VIDEOPATH)
@@ -44,9 +44,11 @@ while cap.isOpened():
   img_in = cv2.resize(frame, YOLOSIZE)
   img_in = cv2.cvtColor(img_in, cv2.COLOR_BGR2RGB)
 
+  #cv2.imshow('input', img_in)
   detections = yolo.detect(img_in)
   
   bboxes, _, _, _ = detections
+  print(bboxes)
 
   # HERE: Store the detections
   detection_container.append(detections)

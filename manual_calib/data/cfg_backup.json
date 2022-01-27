@@ -1,6 +1,6 @@
 {
   "genInfo": {
-    "inFrmPth": "/home/hector/Documents/tesis/source_material/imgs/seattle13.jpg",
+    "inFrmPth": "../dataset/imgs/seattle13.jpg",
     "outCamMatPth": "./data/EDA/calibration13.txt",
     "outCalDispPth": "./data/EDA/calibration13.jpg",
     "outCalDispFlg": 1,

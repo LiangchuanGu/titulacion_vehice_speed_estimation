@@ -18,24 +18,24 @@ if args['mode'] not in ["0", "1", "2"]:
     raise Exception(f"Mode {args['mode']} not supported. Abort")
 
 # Load points dataset
-with open("/home/hector/Documents/tesis/source_material/reference_pts/points.json") as f:
+with open("../dataset/reference_pts/points.json") as f:
     data = json.load(f)
 
 # Load Config Json
-with open("/home/hector/Documents/tesis/manual_calib/data/cfg.json", "r") as f:
+with open("../manual_calib/data/cfg.json", "r") as f:
     dataCfg = json.load(f)
 
 # Backup Config Json
-with open("/home/hector/Documents/tesis/manual_calib/data/cfg_backup.json", 'w') as f:
+with open("../manual_calib/data/cfg_backup.json", 'w') as f:
     json.dump(dataCfg, f, indent=2)
 
 # Mutate Config Json
-with open("/home/hector/Documents/tesis/manual_calib/data/cfg.json", 'w') as f:
+with open("../manual_calib/data/cfg.json", 'w') as f:
 
     dataCfg["camCal"]["cal2dPtLs"] = data["points"][args["video"]]["2dpts"]
     dataCfg["camCal"]["cal3dPtLs"] = data["points"][args["video"]]["pts"]
 
-    dataCfg["genInfo"]['inFrmPth'] = f"/home/hector/Documents/tesis/source_material/imgs/seattle{args['video']}.jpg"
+    dataCfg["genInfo"]['inFrmPth'] = f"../dataset/imgs/seattle{args['video']}.jpg"
 
     if args['mode'] == "0":
         dataCfg["camCal"]["calTyp"] = 0
